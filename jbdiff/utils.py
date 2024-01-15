@@ -129,7 +129,11 @@ class FilesAudioDataset(Dataset):
         filename, total_length = self.files[index], self.durations[index]
         data, sr = load_audio(filename, sr=self.sr, offset=offset, duration=self.sample_length)
         context = repeat(np.zeros(data.shape), 'c t -> c (repeat t)', repeat = self.context_mult)
-        context_data, _ = load_audio(filename, sr=self.sr, offset=context_offset, duration = self.sample_length*self.context_mult)
+        try:
+            context_data, _ = load_audio(filename, sr=self.sr, offset=context_offset, duration = self.sample_length*self.context_mult)
+        except AssertionError as e:
+            error_message = f"Error loading file {filename}: {str(error)}"
+            raise AssertionError(error_message) from None
         length = int(offset - context_offset)
         context_data = context_data[:, :length]
         if length > 0:
