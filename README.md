@@ -27,34 +27,40 @@ I recommend setting up and starting a virtual environment (use Python 3):
 virtualenv --python=python3 venv
 source venv/bin/activate
 ```
+Install deps (runpod/pytorch:1.13.0-py3.10-cuda11.7.1-devel-ubuntu22.04):
+```bash
+apt install -y python-dev-is-python3 pkg-config libavformat-dev libavcodec-dev libavdevice-dev \
+    libavutil-dev libswscale-dev libswresample-dev libavfilter-dev \
+    libopenmpi-dev
+```
 
 Clone repo:
-```
+```bash
 git clone https://github.com/jmoso13/jukebox-diffusion.git
 ```
 
 Install it:
-```
+```bash
 pip install -e jukebox-diffusion
 ```
 
 Navigate into directory:
-```
+```bash
 cd jukebox-diffusion
 ```
 
 Install requirements:
-```
+```bash
 pip install -r requirements.txt
 ```
 
 Download model checkpoints:
-```
+```bash
 python download_ckpts.py
 ```
 
 That's it! You're set up. Maybe useful to check and see your GPU settings:
-```
+```bash
 nvidia-smi
 ```
 
